@@ -6,11 +6,20 @@ var connectionString = builder.Configuration.GetConnectionString("MMSContextConn
 
 builder.Services.AddDbContext<MMSContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<MMSContext>();
+builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<MMSContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+
+/* builder.Services.Configure<IdentityOptions>(OptionsBuilderConfigurationExtensions => 
+{
+    Options.Password.RequireUppercase = false;
+}
+);
+*/
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -31,5 +40,7 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

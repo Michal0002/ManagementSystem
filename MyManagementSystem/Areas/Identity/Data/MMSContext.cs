@@ -10,6 +10,7 @@ public class MMSContext : IdentityDbContext<ApplicationUser>
     public MMSContext(DbContextOptions<MMSContext> options)
         : base(options)
     {
+
     }
 
     protected override void OnModelCreating(ModelBuilder builder)
